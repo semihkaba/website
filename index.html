@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yakında Yayındayız! | Şirket Adınız</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome (İkonlar için) CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Hafif dokulu bir siyah arkaplan */
+            background-image: radial-gradient(circle at 1px 1px, #27272a 1px, transparent 0);
+            background-size: 25px 25px;
+        }
+        /* Geri sayım kutuları için özel stil */
+        .countdown-box {
+            background-color: rgba(30, 41, 59, 0.5); /* Yarı saydam arka plan */
+            backdrop-filter: blur(10px); /* Arkaplanı bulanıklaştırma efekti */
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+    </style>
+</head>
+<body class="text-white flex flex-col items-center justify-center min-h-screen p-6">
+
+    <main class="text-center z-10">
+        <!-- Logo Alanı (Kendi logonuzu ekleyin) -->
+        <div class="mb-8">
+            <!-- Örnek SVG Logo -->
+            <svg class="w-24 h-24 mx-auto text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <h2 class="text-2xl font-bold mt-2 tracking-widest">ŞİRKET ADINIZ</h2>
+        </div>
+
+        <!-- Ana Başlık -->
+        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wider mb-4">
+            Yakında <span class="text-cyan-400">Yayındayız</span>
+        </h1>
+        
+        <!-- Açıklama Metni -->
+        <p class="max-w-2xl mx-auto text-lg text-gray-400 mb-12">
+            Harika bir proje üzerinde çalışıyoruz. Lansman tarihine çok az kaldı! Gelişmelerden haberdar olmak için bizi takip edin.
+        </p>
+
+        <!-- Geri Sayım Sayacı -->
+        <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-xl mx-auto mb-12">
+            <div class="countdown-box p-4 rounded-lg">
+                <p id="days" class="text-4xl font-bold">00</p>
+                <p class="text-sm text-gray-400">Gün</p>
+            </div>
+            <div class="countdown-box p-4 rounded-lg">
+                <p id="hours" class="text-4xl font-bold">00</p>
+                <p class="text-sm text-gray-400">Saat</p>
+            </div>
+            <div class="countdown-box p-4 rounded-lg">
+                <p id="minutes" class="text-4xl font-bold">00</p>
+                <p class="text-sm text-gray-400">Dakika</p>
+            </div>
+            <div class="countdown-box p-4 rounded-lg">
+                <p id="seconds" class="text-4xl font-bold">00</p>
+                <p class="text-sm text-gray-400">Saniye</p>
+            </div>
+        </div>
+
+        <!-- Sosyal Medya İkonları -->
+            <a href="https://instagram.com/mrsemihkaba" class="text-gray-500 hover:text-cyan-400 transition-colors duration-300">
+                <i class="fab fa-instagram fa-2x"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/semihkaba/" class="text-gray-500 hover:text-cyan-400 transition-colors duration-300">
+                <i class="fab fa-linkedin-in fa-2x"></i>
+            </a>
+            <a href="mailto:info@semihkaba.com" class="text-gray-500 hover:text-cyan-400 transition-colors duration-300">
+                <i class="fas fa-envelope fa-2x"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer class="absolute bottom-6 text-center text-gray-600 text-sm">
+        &copy; <span id="year"></span> Şirket Adınız. Tüm Hakları Saklıdır.
+    </footer>
+
+    <script>
+        // --- Geri Sayım Sayacı Scripti ---
+
+        // Hedef tarihi buradan değiştirin. Format: YYYY-MM-DDTHH:MM:SS
+        const countdownDate = new Date("2025-08-01T00:00:00").getTime();
+
+        const countdownElement = document.getElementById('countdown');
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                countdownElement.innerHTML = '<div class="col-span-4 text-3xl font-bold p-6 bg-cyan-500/20 rounded-lg">Yayındayız!</div>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Değerleri iki haneli göstermek için
+            daysEl.innerText = days < 10 ? '0' + days : days;
+            hoursEl.innerText = hours < 10 ? '0' + hours : hours;
+            minutesEl.innerText = minutes < 10 ? '0' + minutes : minutes;
+            secondsEl.innerText = seconds < 10 ? '0' + seconds : seconds;
+
+        }, 1000);
+
+        // --- Yıl Bilgisini Güncel Tutma ---
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
