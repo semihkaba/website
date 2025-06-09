@@ -3,128 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yakında Yayındayız!</title>
-
-    <!-- Tailwind CSS CDN -->
+    <title>Semih Kaba - Siber Güvenlik Stratejisti</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Awesome (İkonlar için) CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a; /* Hafif dokulu bir siyah arkaplan */
-            background-image: radial-gradient(circle at 1px 1px, #27272a 1px, transparent 0);
-            background-size: 25px 25px;
-        }
-        /* Geri sayım kutuları için özel stil */
-        .countdown-box {
-            background-color: rgba(30, 41, 59, 0.5); /* Yarı saydam arka plan */
-            backdrop-filter: blur(10px); /* Arkaplanı bulanıklaştırma efekti */
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
+        /* Custom Stiller */
+        html { scroll-behavior: smooth; }
+        body { background-color: #0D1117; color: #C9D1D9; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Roboto Mono', monospace; }
+        .glass-card { background: rgba(22, 27, 34, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(48, 54, 61, 0.5); border-radius: 1rem; transition: all 0.3s ease; }
+        .glass-card:hover { border: 1px solid rgba(56, 139, 253, 0.7); box-shadow: 0 0 25px rgba(56, 139, 253, 0.1); }
+        .glow-text { color: #58A6FF; text-shadow: 0 0 8px rgba(88, 166, 255, 0.5); }
+        .glow-button { background-color: #238636; color: white; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(35, 134, 54, 0.4); }
+        .glow-button:hover { background-color: #2EA043; box-shadow: 0 0 25px rgba(46, 160, 67, 0.6); transform: translateY(-2px); }
+        .hero-bg { background-image: linear-gradient(to bottom, rgba(13, 17, 23, 0) 0%, rgba(13, 17, 23, 1) 90%), url('https://placehold.co/1920x1080/0d1117/0d1117?text=+'); background-size: cover; background-position: center; position: relative; }
+        .hero-bg::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 30%, rgba(35, 134, 54, 0.1), transparent 70%); pointer-events: none; }
+        .hidden-page { display: none; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="text-white flex flex-col items-center justify-center min-h-screen p-6">
+<body class="antialiased">
 
-    <main class="text-center z-10">
-        <!-- Logo Alanı (Kendi logonuzu ekleyin) -->
-        <div class="mb-8">
-            <!-- Örnek SVG Logo -->
-            <svg class="w-24 h-24 mx-auto text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <h2 class="text-2xl font-bold mt-2 tracking-widest">Semih KABA</h2>
+    <!-- Header / Navigasyon -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" onclick="showPage('main-content')" class="text-xl font-bold font-mono tracking-tighter text-white cursor-pointer">Semih Kaba</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#hakkimda" class="text-gray-400 hover:text-white transition-colors">Hakkımda</a>
+                <a href="#analizler" class="text-gray-400 hover:text-white transition-colors">Analizler</a>
+                <a href="#hizmetler" class="text-gray-400 hover:text-white transition-colors">Çözümler</a>
+                <a href="#egitimler" class="text-gray-400 hover:text-white transition-colors">Eğitimler</a>
+                <a href="#iletisim" class="px-4 py-2 border border-green-500 text-green-400 rounded-md hover:bg-green-500 hover:text-white transition-all">İletişim</a>
+            </nav>
+            <button class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            </button>
         </div>
+    </header>
 
-        <!-- Ana Başlık -->
-        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wider mb-4">
-            Yakında <span class="text-cyan-400">Yayındayız</span>
-        </h1>
-        
-        <!-- Açıklama Metni -->
-        <p class="max-w-2xl mx-auto text-lg text-gray-400 mb-12">
-            Harika bir proje üzerinde çalışıyoruz. Lansman tarihine çok az kaldı! Gelişmelerden haberdar olmak için bizi takip edin.
-        </p>
+    <!-- Ana İçerik Alanı -->
+    <div id="main-content">
+        <main class="pt-20">
+            <section class="hero-bg min-h-screen flex items-center justify-center text-center">
+                <div class="container mx-auto px-6 z-10">
+                    <div class="max-w-4xl mx-auto">
+                        <img src="https://placehold.co/150x150/238636/FFFFFF?text=SK" alt="Semih Kaba Profil Fotoğrafı" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-8 border-4 border-gray-700 shadow-lg">
+                        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-4">Dijital Dünyanın Mimarı.</h1>
+                        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8">Sadece açıkları kapatmıyorum; dijital kaleler inşa ediyor, siber güvenliği bir şirket kültürü haline getiriyorum.</p>
+                        <a href="#hizmetler" class="glow-button font-bold py-3 px-8 rounded-lg text-lg">Stratejik Çözümleri Keşfet</a>
+                    </div>
+                </div>
+            </section>
+            <section id="hakkimda" class="py-20 sm:py-32">
+                 <div class="container mx-auto px-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+                        <div class="lg:col-span-2"><div class="glass-card p-8"><img src="https://placehold.co/600x800/161B22/C9D1D9?text=Semih+Kaba" alt="Semih Kaba" class="rounded-lg shadow-2xl w-full"></div></div>
+                        <div class="lg:col-span-3">
+                            <h2 class="text-sm font-mono tracking-widest uppercase glow-text mb-4">BİYOGRAFİ</h2>
+                            <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Kodların Arkasındaki Stratejist</h3>
+                            <p class="text-gray-400 mb-4 text-lg">Teknolojiye olan tutkum, beni karmaşık sistemlerin en derinlerine inmeye ve onları daha güvenli hale getirmeye itti. Siber güvenlik benim için sadece bir iş değil; bir satranç oyunu. Her zaman bir sonraki hamleyi düşünen, zayıflıkları güce dönüştüren bir zihniyetle yaklaşıyorum.</p>
+                            <p class="text-gray-400 mb-8 text-lg">Kariyerim boyunca, start-up'lardan dev kurumsal yapılara kadar birçok organizasyonun dijital savunmasını güçlendirdim. Felsefem basit: En güçlü savunma, proaktif ve öngörülü olandır.</p>
+                            <div class="flex space-x-4"><a href="https://www.linkedin.com/in/semihkaba/" target="_blank" class="glow-button font-bold py-3 px-8 rounded-lg">LinkedIn Profilim</a><a href="#" class="border border-gray-600 text-gray-300 font-bold py-3 px-8 rounded-lg hover:bg-gray-800 transition-colors">CV'mi İndir</a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-10 bg-black bg-opacity-10">
+                <div class="container mx-auto px-6">
+                    <h3 class="text-center text-gray-500 font-mono text-sm tracking-widest mb-6">Sunduğum Güvenlik Alanları</h3>
+                    <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
+                        <span class="text-gray-400 text-2xl font-semibold">Cloud Security</span><span class="text-gray-400 text-2xl font-semibold">Endpoint Security</span><span class="text-gray-400 text-2xl font-semibold">Data Security</span><span class="text-gray-400 text-2xl font-semibold">Network Security</span><span class="text-gray-400 text-2xl font-semibold">Vulnerability Management</span>
+                    </div>
+                </div>
+            </section>
+            <section id="analizler" class="py-20 sm:py-32 bg-black bg-opacity-20">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-sm font-mono tracking-widest uppercase glow-text mb-4">BİLGİ PAYLAŞIMI</h2>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white">Güncel Analizler ve Makaleler</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="glass-card p-8 flex flex-col"><span class="font-mono text-sm text-gray-500 mb-2">08 Haziran 2025</span><h4 class="text-xl font-bold text-white mb-3 flex-grow">Yapay Zeka Destekli Saldırılar: Yeni Nesil Tehditlere Hazır mıyız?</h4><p class="text-gray-400 mb-6 flex-grow">AI'nın siber suçlular tarafından nasıl kullanılabileceğini ve savunma stratejilerimizi nasıl adapte etmemiz gerektiğini inceliyorum.</p><a href="#" onclick="showPage('article-1')" class="font-bold text-green-400 hover:text-green-300 transition-colors group cursor-pointer">Makaleyi Oku <span class="group-hover:ml-2 transition-all">-&gt;</span></a></div>
+                        <div class="glass-card p-8 flex flex-col"><span class="font-mono text-sm text-gray-500 mb-2">25 Mayıs 2025</span><h4 class="text-xl font-bold text-white mb-3 flex-grow">Sıfır Güven (Zero Trust) Mimarisi: Nereden Başlamalı?</h4><p class="text-gray-400 mb-6 flex-grow">"Asla güvenme, her zaman doğrula" prensibini şirketinizde nasıl etkili bir şekilde uygulayabileceğinize dair pratik adımlar.</p><a href="#" onclick="showPage('article-2')" class="font-bold text-green-400 hover:text-green-300 transition-colors group cursor-pointer">Makaleyi Oku <span class="group-hover:ml-2 transition-all">-&gt;</span></a></div>
+                        <div class="glass-card p-8 flex flex-col"><span class="font-mono text-sm text-gray-500 mb-2">12 Mayıs 2025</span><h4 class="text-xl font-bold text-white mb-3 flex-grow">Sosyal Mühendislik: En Zayıf Halka Olan İnsanı Güçlendirmek</h4><p class="text-gray-400 mb-6 flex-grow">Teknik savunmanın ötesinde, insan faktörünün siber güvenlikteki kritik rolü ve çalışan farkındalığını artırma yöntemleri.</p><a href="#" onclick="showPage('article-3')" class="font-bold text-green-400 hover:text-green-300 transition-colors group cursor-pointer">Makaleyi Oku <span class="group-hover:ml-2 transition-all">-&gt;</span></a></div>
+                    </div>
+                </div>
+            </section>
+            <section id="hizmetler" class="py-20 sm:py-32">
+                 <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-sm font-mono tracking-widest uppercase glow-text mb-4">DEĞER ÖNERİSİ</h2>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white">Stratejik Siber Çözümler</h3>
+                        <p class="text-lg text-gray-400 max-w-3xl mx-auto mt-4">Sadece teknik hizmet sunmuyorum; iş hedeflerinize entegre, ölçülebilir sonuçlar üreten ve sizi rakiplerinizden bir adım öne taşıyan güvenlik stratejileri tasarlıyorum.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+                        <div class="glass-card p-8"><h4 class="text-xl font-bold text-white mb-3">Saldırı Simülasyonu & Zafiyet Yönetimi</h4><p class="text-gray-400">Sıradan bir pentestin ötesinde, gerçek dünya saldırı senaryolarını simüle ederek, en karmaşık zafiyetleri bile saldırganlardan önce bulup kapatıyoruz.</p></div>
+                        <div class="glass-card p-8"><h4 class="text-xl font-bold text-white mb-3">Güvenlik Mimarisi & Strateji Geliştirme</h4><p class="text-gray-400">Şirketinizin DNA'sına uygun, "sıfır güven" prensiplerine dayalı, ölçeklenebilir ve geleceğe dönük güvenlik mimarileri tasarlıyoruz.</p></div>
+                        <div class="glass-card p-8"><h4 class="text-xl font-bold text-white mb-3">Kriz Müdahalesi & Elit Takım Eğitimi</h4><p class="text-gray-400">Bir kriz anında soğukkanlılıkla hareket edecek elit iç güvenlik ekipleri yetiştiriyor, en kötü senaryolara karşı hazırlıklı olmanızı sağlıyoruz.</p></div>
+                    </div>
+                </div>
+            </section>
 
-        <!-- Geri Sayım Sayacı -->
-        <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-xl mx-auto mb-12">
-            <div class="countdown-box p-4 rounded-lg">
-                <p id="days" class="text-4xl font-bold">00</p>
-                <p class="text-sm text-gray-400">Gün</p>
+            <section id="egitimler" class="py-20 sm:py-32 bg-black bg-opacity-20 overflow-hidden">
+                <div class="container mx-auto px-6">
+                    <div class="flex justify-between items-center mb-12">
+                        <div class="text-left">
+                            <h2 class="text-sm font-mono tracking-widest uppercase glow-text mb-4">BİLGİYİ GÜCE DÖNÜŞTÜR</h2>
+                            <h3 class="text-3xl md:text-4xl font-bold text-white">Öne Çıkan Eğitim Programları</h3>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                           <button id="scroll-left" class="p-2 rounded-full border border-gray-700 hover:bg-gray-800 transition-colors"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+                           <button id="scroll-right" class="p-2 rounded-full border border-gray-700 hover:bg-gray-800 transition-colors"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+                        </div>
+                    </div>
+                    <div id="trainings-container" class="flex space-x-8 overflow-x-auto snap-x snap-mandatory pb-8 hide-scrollbar">
+                        <!-- Eğitim Kartları Buraya Gelecek -->
+                        <div class="snap-start flex-shrink-0 w-full sm:w-1/2 lg:w-1/3"><div class="glass-card overflow-hidden h-full flex flex-col"><img src="https://placehold.co/800x400/161B22/58A6FF?text=Uygulamalı+Etik+Hacker'lık" alt="Etik Hackerlık Eğitimi" class="w-full h-48 object-cover"><div class="p-8 flex flex-col flex-grow"><h4 class="text-xl font-bold text-white mb-3">Uygulamalı Etik Hacker'lık Masterclass</h4><p class="text-gray-400 mb-6 flex-grow">Teoriden pratiğe, en güncel araçlar ve tekniklerle ofansif güvenlik yeteneklerinizi en üst seviyeye taşıyın.</p><a href="#" onclick="showPage('all-trainings')" class="glow-button mt-auto text-center font-bold py-2 px-6 rounded-lg text-sm">Detayları İncele</a></div></div></div>
+                        <div class="snap-start flex-shrink-0 w-full sm:w-1/2 lg:w-1/3"><div class="glass-card overflow-hidden h-full flex flex-col"><img src="https://placehold.co/800x400/161B22/238636?text=Kurumsal+Siber+Farkındalık" alt="Kurumsal Farkındalık Eğitimi" class="w-full h-48 object-cover"><div class="p-8 flex flex-col flex-grow"><h4 class="text-xl font-bold text-white mb-3">Kurumsal Siber Farkındalık Programı</h4><p class="text-gray-400 mb-6 flex-grow">Şirketinizin en zayıf halkasını en güçlü savunma hattınız haline getirin.</p><a href="#" onclick="showPage('all-trainings')" class="glow-button mt-auto text-center font-bold py-2 px-6 rounded-lg text-sm">Detayları İncele</a></div></div></div>
+                        <div class="snap-start flex-shrink-0 w-full sm:w-1/2 lg:w-1/3"><div class="glass-card overflow-hidden h-full flex flex-col"><img src="https://placehold.co/800x400/161B22/C9D1D9?text=Bulut+Güvenliği" alt="Bulut Güvenliği Eğitimi" class="w-full h-48 object-cover"><div class="p-8 flex flex-col flex-grow"><h4 class="text-xl font-bold text-white mb-3">AWS & Azure Bulut Güvenliği</h4><p class="text-gray-400 mb-6 flex-grow">En popüler bulut platformlarında güvenli mimariler oluşturma ve yönetme stratejileri.</p><a href="#" onclick="showPage('all-trainings')" class="glow-button mt-auto text-center font-bold py-2 px-6 rounded-lg text-sm">Detayları İncele</a></div></div></div>
+                        <div class="snap-start flex-shrink-0 w-full sm:w-1/2 lg:w-1/3"><div class="glass-card overflow-hidden h-full flex flex-col"><img src="https://placehold.co/800x400/161B22/e0b400?text=Olay+Müdahalesi" alt="Olay Müdahalesi Eğitimi" class="w-full h-48 object-cover"><div class="p-8 flex flex-col flex-grow"><h4 class="text-xl font-bold text-white mb-3">Olay Müdahalesi ve Dijital Adli Bilişim</h4><p class="text-gray-400 mb-6 flex-grow">Bir siber kriz anında kanıt toplama, analiz etme ve raporlama süreçlerine hakim olun.</p><a href="#" onclick="showPage('all-trainings')" class="glow-button mt-auto text-center font-bold py-2 px-6 rounded-lg text-sm">Detayları İncele</a></div></div></div>
+                    </div>
+                     <div class="text-center mt-12">
+                        <a href="#" onclick="showPage('all-trainings')" class="border border-gray-600 text-gray-300 font-bold py-3 px-8 rounded-lg hover:bg-gray-800 transition-colors">Tüm Eğitimleri Gör</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="iletisim" class="py-20 sm:py-32">
+                <div class="container mx-auto px-6">
+                    <div class="max-w-2xl mx-auto text-center">
+                        <h2 class="text-sm font-mono tracking-widest uppercase glow-text mb-4">BAĞLANTI KUR</h2>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-8">Bir Sonraki Projenizi Konuşalım.</h3>
+                        <p class="text-gray-400 mb-10">Siber güvenlik stratejileri, potansiyel iş birlikleri veya bir kahve eşliğinde teknoloji sohbeti için aşağıdaki formu kullanabilir veya sosyal medya üzerinden ulaşabilirsiniz.</p>
+                        <!-- GÜNCELLENMİŞ FORM -->
+                        <form id="contact-form" action="https://formsubmit.co/info@semihkaba.com" method="POST" class="w-full max-w-xl mx-auto">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <input type="text" name="Ad" placeholder="Adınız" required class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <input type="email" name="E-posta" placeholder="E-posta Adresiniz" required class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-500">
+                            </div>
+                            <textarea name="Mesaj" placeholder="Mesajınız..." rows="5" required class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 mb-4 text-white focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+                            
+                            <!-- Spam koruması için -->
+                            <input type="hidden" name="_captcha" value="false">
+                            
+                            <button type="submit" class="glow-button font-bold py-3 px-8 w-full rounded-lg text-lg">Mesajı Gönder</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="bg-black py-8">
+            <div class="container mx-auto px-6 text-center text-gray-500">
+                <div class="flex justify-center space-x-6 mb-4">
+                    <a href="https://www.linkedin.com/in/semihkaba/" target="_blank" class="hover:text-white transition-colors">LinkedIn</a><a href="https://www.instagram.com/mrsemihkaba/" target="_blank" class="hover:text-white transition-colors">Instagram</a><a href="#" target="_blank" class="hover:text-white transition-colors">Youtube</a><a href="https://github.com/mrsemihkaba" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                </div>
+                <p>&copy; 2025 Semih Kaba. Tüm hakları saklıdır.</p>
+                <p class="text-sm mt-2">Dijital dünyada izinizi güvenle bırakın.</p>
             </div>
-            <div class="countdown-box p-4 rounded-lg">
-                <p id="hours" class="text-4xl font-bold">00</p>
-                <p class="text-sm text-gray-400">Saat</p>
+        </footer>
+    </div>
+
+    <!-- Makale Sayfaları -->
+    <div id="article-1" class="hidden-page p-6 md:p-12 pt-24 md:pt-32"><div class="max-w-4xl mx-auto"><button onclick="showPage('main-content')" class="mb-8 text-green-400 hover:text-green-300 transition-colors">&lt;- Geri Dön</button><h1 class="text-4xl md:text-5xl font-black text-white mb-4">Yapay Zeka Destekli Saldırılar: Yeni Nesil Tehditlere Hazır mıyız?</h1><p class="text-gray-500 font-mono mb-8">Yazar: Semih Kaba | Tarih: 08 Haziran 2025</p><img src="https://placehold.co/1200x600/161B22/58A6FF?text=AI+in+Cybersecurity" alt="Yapay Zeka ve Siber Güvenlik" class="rounded-lg mb-8 w-full"><div class="prose prose-invert lg:prose-xl max-w-none text-gray-300"><p>Yapay zeka (AI), siber güvenlik dünyasında iki ucu keskin bir kılıç haline geldi...</p></div></div></div>
+    <div id="article-2" class="hidden-page p-6 md:p-12 pt-24 md:pt-32"><div class="max-w-4xl mx-auto"><button onclick="showPage('main-content')" class="mb-8 text-green-400 hover:text-green-300 transition-colors">&lt;- Geri Dön</button><h1 class="text-4xl md:text-5xl font-black text-white mb-4">Sıfır Güven (Zero Trust) Mimarisi: Nereden Başlamalı?</h1><p class="text-gray-500 font-mono mb-8">Yazar: Semih Kaba | Tarih: 25 Mayıs 2025</p><img src="https://placehold.co/1200x600/161B22/58A6FF?text=Zero+Trust+Architecture" alt="Sıfır Güven Mimarisi" class="rounded-lg mb-8 w-full"><div class="prose prose-invert lg:prose-xl max-w-none text-gray-300"><p>"Asla güvenme, her zaman doğrula." Bu basit cümle, modern siber güvenliğin en devrimci konseptlerinden biri olan Sıfır Güven (Zero Trust) mimarisinin temelini oluşturur...</p></div></div></div>
+    <div id="article-3" class="hidden-page p-6 md:p-12 pt-24 md:pt-32"><div class="max-w-4xl mx-auto"><button onclick="showPage('main-content')" class="mb-8 text-green-400 hover:text-green-300 transition-colors">&lt;- Geri Dön</button><h1 class="text-4xl md:text-5xl font-black text-white mb-4">Sosyal Mühendislik: En Zayıf Halka Olan İnsanı Güçlendirmek</h1><p class="text-gray-500 font-mono mb-8">Yazar: Semih Kaba | Tarih: 12 Mayıs 2025</p><img src="https://placehold.co/1200x600/161B22/58A6FF?text=Social+Engineering" alt="Sosyal Mühendislik" class="rounded-lg mb-8 w-full"><div class="prose prose-invert lg:prose-xl max-w-none text-gray-300"><p>En gelişmiş güvenlik duvarlarını, en karmaşık şifreleme algoritmalarını kullanabilirsiniz. Ancak tüm bu teknik savunmanın ardında, bir anlık dikkatsizlikle tüm kapıları açabilecek bir faktör bulunur: insan...</p></div></div></div>
+
+    <!-- Tüm Eğitimler Sayfası -->
+    <div id="all-trainings" class="hidden-page p-6 md:p-12 pt-24 md:pt-32">
+        <div class="container mx-auto">
+            <button onclick="showPage('main-content')" class="mb-8 text-green-400 hover:text-green-300 transition-colors">&lt;- Ana Sayfaya Dön</button>
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-black text-white">Tüm Eğitim Programları</h1>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto mt-4">Bilginizi güce dönüştürün. Sektörün en çok aranan yetkinliklerini kazanmak için tasarlanmış programlarımızdan birini seçin.</p>
             </div>
-            <div class="countdown-box p-4 rounded-lg">
-                <p id="minutes" class="text-4xl font-bold">00</p>
-                <p class="text-sm text-gray-400">Dakika</p>
-            </div>
-            <div class="countdown-box p-4 rounded-lg">
-                <p id="seconds" class="text-4xl font-bold">00</p>
-                <p class="text-sm text-gray-400">Saniye</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Eğitim Kartları Kopyaları -->
+                <div class="glass-card overflow-hidden h-full flex flex-col"><img src="https://placehold.co/800x400/161B22/58A6FF?text=Uygulamalı+Etik+Hacker'lık" alt="Etik Hackerlık Eğitimi" class="w-full h-48 object-cover"><div class="p-8 flex flex-col flex-grow"><h4 class="text-xl font-bold text-white mb-3">Uygulamalı Etik Hacker'lık Masterclass</h4><p class="text-gray-400 mb-6 flex-grow">Teoriden pratiğe, en güncel araçlar ve tekniklerle ofansif güvenlik yeteneklerinizi en üst seviyeye taşıyın.</p><a href="#iletisim" onclick="showPage('main-content')" class="glow-button mt-auto text-center font-bold py-2 px-6 rounded-lg text-sm">Eğitimi Satın Al</a></div></div>
+                <div class="glass-card overflow-hidden h-full flex flex-col"><img src="https://placehold.co/800x400/161B22/238636?text=Kurumsal+Siber+Farkındalık" alt="Kurumsal Farkındalık Eğitimi" class="w-full h-48 object-cover"><div class="p-8 flex flex-col flex-grow"><h4 class="text-xl font-bold text-white mb-3">Kurumsal Siber Farkındalık Programı</h4><p class="text-gray-400 mb-6 flex-grow">Şirketinizin en zayıf halkasını en güçlü savunma hattınız haline getirin.</p><a href="#iletisim" onclick="showPage('main-content')" class="glow-button mt-auto text-center font-bold py-2 px-6 rounded-lg text-sm">Eğitimi Satın Al</a></div></div>
+                <div class="glass-card overflow-hidden h-full flex flex-col"><img src="https://placehold.co/800x400/161B22/C9D1D9?text=Bulut+Güvenliği" alt="Bulut Güvenliği Eğitimi" class="w-full h-48 object-cover"><div class="p-8 flex flex-col flex-grow"><h4 class="text-xl font-bold text-white mb-3">AWS & Azure Bulut Güvenliği</h4><p class="text-gray-400 mb-6 flex-grow">En popüler bulut platformlarında güvenli mimariler oluşturma ve yönetme stratejileri.</p><a href="#iletisim" onclick="showPage('main-content')" class="glow-button mt-auto text-center font-bold py-2 px-6 rounded-lg text-sm">Eğitimi Satın Al</a></div></div>
+                <div class="glass-card overflow-hidden h-full flex flex-col"><img src="https://placehold.co/800x400/161B22/e0b400?text=Olay+Müdahalesi" alt="Olay Müdahalesi Eğitimi" class="w-full h-48 object-cover"><div class="p-8 flex flex-col flex-grow"><h4 class="text-xl font-bold text-white mb-3">Olay Müdahalesi ve Dijital Adli Bilişim</h4><p class="text-gray-400 mb-6 flex-grow">Bir siber kriz anında kanıt toplama, analiz etme ve raporlama süreçlerine hakim olun.</p><a href="#iletisim" onclick="showPage('main-content')" class="glow-button mt-auto text-center font-bold py-2 px-6 rounded-lg text-sm">Eğitimi Satın Al</a></div></div>
+                <div class="glass-card overflow-hidden h-full flex flex-col"><img src="https://placehold.co/800x400/161B22/b34ee9?text=Güvenli+Kod+Geliştirme" alt="Güvenli Kod Geliştirme Eğitimi" class="w-full h-48 object-cover"><div class="p-8 flex flex-col flex-grow"><h4 class="text-xl font-bold text-white mb-3">Güvenli Kod Geliştirme (SDLC)</h4><p class="text-gray-400 mb-6 flex-grow">Yazılım geliştirme yaşam döngüsünün her aşamasına güvenliği entegre etme teknikleri.</p><a href="#iletisim" onclick="showPage('main-content')" class="glow-button mt-auto text-center font-bold py-2 px-6 rounded-lg text-sm">Eğitimi Satın Al</a></div></div>
+                <div class="glass-card overflow-hidden h-full flex flex-col"><img src="https://placehold.co/800x400/161B22/e94e68?text=Network+Eğitimi" alt="Network Eğitimi" class="w-full h-48 object-cover"><div class="p-8 flex flex-col flex-grow"><h4 class="text-xl font-bold text-white mb-3">Network ve Altyapı Güvenliği</h4><p class="text-gray-400 mb-6 flex-grow">Network yapısını anlama ve daha güvenli hale getirme yöntemleri.</p><a href="#iletisim" onclick="showPage('main-content')" class="glow-button mt-auto text-center font-bold py-2 px-6 rounded-lg text-sm">Eğitimi Satın Al</a></div></div>
             </div>
         </div>
-
-        <!-- Sosyal Medya İkonları -->
-            <a href="https://instagram.com/mrsemihkaba" class="text-gray-500 hover:text-cyan-400 transition-colors duration-300">
-                <i class="fab fa-instagram fa-2x"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/semihkaba/" class="text-gray-500 hover:text-cyan-400 transition-colors duration-300">
-                <i class="fab fa-linkedin-in fa-2x"></i>
-            </a>
-            <a href="mailto:info@semihkaba.com" class="text-gray-500 hover:text-cyan-400 transition-colors duration-300">
-                <i class="fas fa-envelope fa-2x"></i>
-            </a>
-        </div>
-    </main>
-
-    <footer class="absolute bottom-6 text-center text-gray-600 text-sm">
-        &copy; <span id="year"></span> Semih KABA. Tüm Hakları Saklıdır.
-    </footer>
+    </div>
 
     <script>
-        // --- Geri Sayım Sayacı Scripti ---
-
-        // Hedef tarihi buradan değiştirin. Format: YYYY-MM-DDTHH:MM:SS
-        const countdownDate = new Date("2025-08-01T00:00:00").getTime();
-
-        const countdownElement = document.getElementById('countdown');
-        const daysEl = document.getElementById('days');
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-        const secondsEl = document.getElementById('seconds');
-
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-
-            if (distance < 0) {
-                clearInterval(timer);
-                countdownElement.innerHTML = '<div class="col-span-4 text-3xl font-bold p-6 bg-cyan-500/20 rounded-lg">Yayındayız!</div>';
-                return;
+        // Sayfa geçişlerini yöneten script
+        function showPage(pageId) {
+            document.querySelectorAll('#main-content, .hidden-page').forEach(page => {
+                page.style.display = 'none';
+            });
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.style.display = 'block';
+                window.scrollTo(0, 0); 
             }
+             if (pageId === 'main-content') {
+                 document.getElementById('main-content').style.display = 'block';
+            }
+        }
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Eğitimler carousel script'i
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('trainings-container');
+            const scrollLeftBtn = document.getElementById('scroll-left');
+            const scrollRightBtn = document.getElementById('scroll-right');
 
-            // Değerleri iki haneli göstermek için
-            daysEl.innerText = days < 10 ? '0' + days : days;
-            hoursEl.innerText = hours < 10 ? '0' + hours : hours;
-            minutesEl.innerText = minutes < 10 ? '0' + minutes : minutes;
-            secondsEl.innerText = seconds < 10 ? '0' + seconds : seconds;
+            if (container && scrollLeftBtn && scrollRightBtn) {
+                 const scrollAmount = container.offsetWidth * 0.8; // Her tıklamada ne kadar kaydırılacağı
 
-        }, 1000);
+                scrollLeftBtn.addEventListener('click', () => {
+                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
 
-        // --- Yıl Bilgisini Güncel Tutma ---
-        document.getElementById('year').textContent = new Date().getFullYear();
+                scrollRightBtn.addEventListener('click', () => {
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+            }
+        });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.x/dist/typography.min.js"></script>
+
 </body>
 </html>
