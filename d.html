@@ -1,1 +1,605 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Semih & Beyza | Sürpriz Sayfa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fef9f0 0%, #ffe6d5 100%);
+            font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* arka planda uçan kalpler & yıldızlar */
+        .floating-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart-bg {
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0.2;
+            animation: floatHeart 12s infinite linear;
+            user-select: none;
+            color: #ff8c9e;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.3;
+            }
+            80% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        /* ana kart */
+        .card {
+            position: relative;
+            z-index: 10;
+            max-width: 550px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(2px);
+            border-radius: 3rem;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 215, 185, 0.6);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fadeSlideUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* başlık kısmı */
+        .hero {
+            background: linear-gradient(135deg, #ffb88c, #ff9f6e);
+            padding: 2rem 1.8rem 2rem 1.8rem;
+            text-align: center;
+            color: white;
+            border-bottom-left-radius: 2.5rem;
+            border-bottom-right-radius: 2.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            letter-spacing: -0.5px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .hero-icon {
+            font-size: 3.8rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            animation: wave 1.5s infinite;
+        }
+
+        @keyframes wave {
+            0%,100%{ transform: rotate(0deg);}
+            25%{ transform: rotate(12deg);}
+            75%{ transform: rotate(-6deg);}
+        }
+
+        /* içerik bölümü */
+        .content {
+            padding: 2rem 1.8rem 2rem 1.8rem;
+        }
+
+        .message {
+            background: #fff6f0;
+            padding: 1.3rem;
+            border-radius: 2rem;
+            margin-bottom: 2rem;
+            border-left: 6px solid #ff9f6e;
+            font-size: 1.05rem;
+            line-height: 1.45;
+            color: #4e3e33;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .message span {
+            font-weight: 700;
+            color: #e67e3a;
+        }
+
+        .question-box {
+            text-align: center;
+            margin: 1.8rem 0;
+        }
+
+        .question-text {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #c25d2e;
+            margin-bottom: 1rem;
+            background: #fff0e5;
+            display: inline-block;
+            padding: 0.4rem 1.5rem;
+            border-radius: 60px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .btn {
+            border: none;
+            padding: 0.9rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+        }
+
+        .btn-evet {
+            background: #ff8c5a;
+            color: white;
+            min-width: 120px;
+        }
+
+        .btn-evet:hover {
+            background: #ff7a42;
+            transform: scale(1.02);
+            box-shadow: 0 8px 18px rgba(255, 108, 50, 0.3);
+        }
+
+        .btn-hayir {
+            background: #e2dbd4;
+            color: #7c5f4b;
+        }
+
+        .btn-hayir:hover {
+            background: #d4c9bf;
+        }
+
+        /* gizemli sürpriz alanı */
+        .surprise-area {
+            margin-top: 2rem;
+            background: #faeedf;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px dashed #ffb48a;
+        }
+
+        .hidden-content {
+            display: none;
+            animation: fadeZoom 0.5s ease;
+        }
+
+        .show-content {
+            display: block;
+        }
+
+        @keyframes fadeZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .special-message {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .special-message h3 {
+            font-size: 1.6rem;
+            color: #c55828;
+            margin-bottom: 0.8rem;
+        }
+
+        .special-message p {
+            font-size: 1rem;
+            margin: 0.8rem 0;
+            color: #4f3e33;
+        }
+
+        .heart-rain {
+            font-size: 2rem;
+            letter-spacing: 8px;
+            margin: 0.8rem 0;
+            animation: pulseHeart 1s infinite;
+        }
+
+        @keyframes pulseHeart {
+            0% { transform: scale(1); opacity: 0.7;}
+            100% { transform: scale(1.1); opacity: 1;}
+        }
+
+        .btn-kapat {
+            background: none;
+            border: 1px solid #ffb48a;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            margin-top: 1rem;
+            color: #b75d2e;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-kapat:hover {
+            background: #ffede3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.75rem;
+            color: #bb9b84;
+            border-top: 1px solid #ffdecb;
+            background: rgba(255,248,240,0.7);
+        }
+
+        /* küçük ekranlar */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .question-text {
+                font-size: 1.3rem;
+            }
+            .btn {
+                padding: 0.7rem 1.4rem;
+                font-size: 1rem;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="floating-bg" id="floatingBg"></div>
+
+<div class="card" id="mainCard">
+    <div class="hero">
+        <div class="hero-icon">✨💫✨</div>
+        <h1>Merhaba Beyza 🌸</h1>
+        <p>Güzel bir sürprizle karşındayım ✨</p>
+    </div>
+    <div class="content">
+        <div class="message">
+            💬 <span>Semih</span> sana bir şey söylemek istiyor: <br>
+            “Merhaba, tanışıyor gibi olalım mı? Sonra istersen sana çok özel bir şey <strong>gösterebilirim</strong>.” 🌟
+        </div>
+
+        <div class="question-box">
+            <div class="question-text">❓ Peki, izin verir misin? ❓</div>
+            <div class="buttons">
+                <button class="btn btn-evet" id="evetBtn">Evet, göster! 💖</button>
+                <button class="btn btn-hayir" id="hayirBtn">Belki sonra 🍃</button>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 12px; color:#b9815f;">(dokunman yeterli, sihirli an başlasın ✨)</p>
+        </div>
+
+        <!-- sürpriz alanı (başlangıçta gizli) -->
+        <div class="surprise-area" id="surpriseArea">
+            <div id="surpriseInner" class="hidden-content">
+                <div class="special-message">
+                    <div class="heart-rain">💖💕💗💘💝</div>
+                    <h3>🎉 Sürpriz! 🎉</h3>
+                    <p><strong>Beyza,</strong> işte tam sana özel hazırladığım an 🌷</p>
+                    <p>Ben <strong>Semih</strong>. Bu küçük dijital köşeyi senin için tasarladım. NFC dokunuşunla karşıma çıkan bu sihirli sayfa, aslında şunu anlatıyor: <br><br>
+                    ✨ <strong>"Her şey bir merhaba ile başlar, belki de güzel bir hikaye"</strong> ✨ <br><br>
+                    Umarım bu jest seni gülümsetmiştir. Çünkü gülümsemen çok değerli 🌈</p>
+                    <p style="background:#fff0e5; border-radius:50px; padding:8px; margin-top:12px;">📸 <em>Not: Bu sayfa, NFC'nin büyüsüyle sadece senin için açıldı.</em> 💫</p>
+                    <div style="margin: 15px 0 5px;">
+                        <span style="font-size: 2rem;">🤍 Semih & Beyza 🤍</span>
+                    </div>
+                    <button class="btn-kapat" id="kapatBtn">❤️ Tekrar gizle ❤️</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        🌙 küçük bir dokunuş, büyük bir tebessüm | Semih ❤️
+    </footer>
+</div>
+
+<script>
+    // arka plana uçan kalp elementleri ekleme (romantik hava)
+    function createFloatingHearts() {
+        const bgContainer = document.getElementById('floatingBg');
+        const heartSymbols = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🩷', '🌸', '✨', '⭐'];
+        const count = 28;
+        for (let i = 0; i < count; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            const randomHeart = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.innerText = randomHeart;
+            const size = Math.random() * 1.5 + 0.7; // rem
+            heart.style.fontSize = `${size}rem`;
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.animationDuration = `${Math.random() * 8 + 6}s`;
+            heart.style.animationDelay = `${Math.random() * 15}s`;
+            heart.style.opacity = Math.random() * 0.3 + 0.1;
+            bgContainer.appendChild(heart);
+        }
+    }
+
+    // "Evet" butonuna basınca sürpriz göster + özel animasyon ve ses efekti simülasyonu (vibrasyon opsiyonel)
+    const evetBtn = document.getElementById('evetBtn');
+    const hayirBtn = document.getElementById('hayirBtn');
+    const surpriseInner = document.getElementById('surpriseInner');
+    const kapatBtn = document.getElementById('kapatBtn');
+
+    // Hoş bir konfeti efekti (basit romantik konfeti)
+    function launchRomanticConfetti() {
+        // canva confetti kullanacağız (hafif)
+        if (typeof window.confetti === 'function') {
+            window.confetti({
+                particleCount: 120,
+                spread: 70,
+                origin: { y: 0.6 },
+                startVelocity: 15,
+                colors: ['#ff9f6e', '#ffc4a4', '#ff6f4a', '#ffb48a', '#ffd0b5']
+            });
+            setTimeout(() => {
+                window.confetti({
+                    particleCount: 60,
+                    spread: 45,
+                    origin: { y: 0.4, x: 0.3 },
+                    startVelocity: 12,
+                });
+            }, 180);
+        } else {
+            // confetti yoksa konsola yaz, ama sorun yok
+            console.log("confetti library not loaded? ama yine de güzel :)");
+        }
+    }
+
+    // sürpriz göster fonksiyonu
+    function showSurprise() {
+        // eğer zaten görünüyorsa tekrar animasyon için kaldırıp ekleyebiliriz
+        if (surpriseInner.classList.contains('show-content')) {
+            // zaten açık, ama yeniden göstermek için kısa bir animasyon tetiklenebilir
+            surpriseInner.style.animation = 'none';
+            setTimeout(() => {
+                surpriseInner.style.animation = 'fadeZoom 0.5s ease';
+            }, 10);
+            launchRomanticConfetti();
+            // ekstra titreşim yok ama cihazda NFC zaten dokunma hissi yaratır
+            return;
+        }
+        // gizliyse göster
+        surpriseInner.classList.remove('hidden-content');
+        surpriseInner.classList.add('show-content');
+        // butona basıldığında güzel confetti fırlat
+        launchRomanticConfetti();
+        // ek olarak sayfaya özel mesaj kaydırma (isteğe bağlı)
+        document.getElementById('surpriseArea').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // küçük bir titreşim (mobil cihazlarda NFC ile eğlenceli olur, izin varsa)
+        if (navigator.vibrate) {
+            navigator.vibrate(50);
+        }
+        // ayrıca ekranda ekstra kalp patlaması efekti (geçici ek div)
+        createTempSparkle();
+    }
+
+    function hideSurprise() {
+        if (surpriseInner.classList.contains('show-content')) {
+            surpriseInner.classList.remove('show-content');
+            surpriseInner.classList.add('hidden-content');
+            // küçük bir incelik: kapatınca üzgün değil, sadece gizlendi mesajı yok ama gönül rahatlığı
+            if (navigator.vibrate) navigator.vibrate(30);
+        }
+    }
+
+    // ek geçici ışıltı
+    function createTempSparkle() {
+        const sparkDiv = document.createElement('div');
+        sparkDiv.style.position = 'fixed';
+        sparkDiv.style.top = '0';
+        sparkDiv.style.left = '0';
+        sparkDiv.style.width = '100%';
+        sparkDiv.style.height = '100%';
+        sparkDiv.style.pointerEvents = 'none';
+        sparkDiv.style.zIndex = '999';
+        sparkDiv.style.background = 'radial-gradient(circle, rgba(255,200,150,0.2) 0%, rgba(255,255,255,0) 80%)';
+        sparkDiv.style.animation = 'fadeOutSpark 0.8s forwards';
+        document.body.appendChild(sparkDiv);
+        setTimeout(() => {
+            sparkDiv.remove();
+        }, 800);
+    }
+    // style ekle
+    const styleSheet = document.createElement("style");
+    styleSheet.textContent = `
+        @keyframes fadeOutSpark {
+            0% { opacity: 0.7; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+    `;
+    document.head.appendChild(styleSheet);
+
+    // "Evet" butonuna basınca
+    evetBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSurprise();
+        // butona basınca ekstra dokunma hissi: eğer daha önce söylenmemiş bir şey
+        // aynı zamanda butonun metnini geçici değiştirme (eğlence)
+        const originalText = evetBtn.innerText;
+        evetBtn.innerText = '🎉 Harika! 🎉';
+        setTimeout(() => {
+            evetBtn.innerText = originalText;
+        }, 1200);
+    });
+
+    // "Hayır" butonuna basınca tatlı bir tepki, sürprizi göstermez ama kibar bir cevap
+    hayirBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        // eğer sürpriz açıksa kapatmaya gerek yok, kullanıcı hayır dedi ama açık değilse uyarı değil tatlı mesaj
+        if (surpriseInner.classList.contains('show-content')) {
+            // zaten sürpriz görünüyor, hayır desen de sürprizi kapatmayalım, ama sorabiliriz: "gizleyeyim mi?"
+            const userWantsHide = confirm("Sürprizi şimdilik gizleyeyim mi? İstersen tekrar 'Evet' butonuna tıklayabilirsin 💖");
+            if (userWantsHide) {
+                hideSurprise();
+            }
+        } else {
+            // sürpriz kapalıyken hayır derse tatlı bir geri bildirim
+            const toastMsg = document.createElement('div');
+            toastMsg.innerText = '🍃 Anlıyorum, belki başka bir zaman. Ama senin için hep burada olacak ✨';
+            toastMsg.style.position = 'fixed';
+            toastMsg.style.bottom = '30px';
+            toastMsg.style.left = '50%';
+            toastMsg.style.transform = 'translateX(-50%)';
+            toastMsg.style.backgroundColor = '#ffecd9';
+            toastMsg.style.color = '#b75d2e';
+            toastMsg.style.padding = '12px 20px';
+            toastMsg.style.borderRadius = '60px';
+            toastMsg.style.fontWeight = '500';
+            toastMsg.style.boxShadow = '0 6px 20px rgba(0,0,0,0.1)';
+            toastMsg.style.zIndex = '1000';
+            toastMsg.style.fontSize = '0.9rem';
+            toastMsg.style.backdropFilter = 'blur(4px)';
+            toastMsg.style.border = '1px solid #ffcdae';
+            document.body.appendChild(toastMsg);
+            setTimeout(() => {
+                toastMsg.style.opacity = '0';
+                setTimeout(() => toastMsg.remove(), 400);
+            }, 2200);
+            if (navigator.vibrate) navigator.vibrate(20);
+        }
+    });
+
+    // kapat butonu
+    kapatBtn.addEventListener('click', () => {
+        hideSurprise();
+        // kısa bir bilgi mesajı göster (isteğe bağlı)
+        const closeNote = document.createElement('div');
+        closeNote.innerText = '💭 Sürpriz gizlendi. İstersen tekrar "Evet, göster!" diyebilirsin.';
+        closeNote.style.position = 'fixed';
+        closeNote.style.bottom = '20px';
+        closeNote.style.left = '20px';
+        closeNote.style.right = '20px';
+        closeNote.style.maxWidth = '280px';
+        closeNote.style.margin = '0 auto';
+        closeNote.style.backgroundColor = '#ffffffcc';
+        closeNote.style.backdropFilter = 'blur(8px)';
+        closeNote.style.padding = '10px';
+        closeNote.style.borderRadius = '30px';
+        closeNote.style.fontSize = '0.75rem';
+        closeNote.style.textAlign = 'center';
+        closeNote.style.color = '#af7a57';
+        closeNote.style.border = '1px solid #ffd8be';
+        closeNote.style.zIndex = '999';
+        document.body.appendChild(closeNote);
+        setTimeout(() => {
+            closeNote.style.opacity = '0';
+            setTimeout(() => closeNote.remove(), 300);
+        }, 1800);
+    });
+
+    // ek olarak NFC ile açıldığında direkt olarak bir yönlendirme değil, sayfa hazır olduğunda belki sayfa ilk yüklendiğinde ufak bir selam mesajı
+    window.addEventListener('load', () => {
+        createFloatingHearts();
+        // sayfa ilk kez yüklendiğinde kullanıcıya gizemli bir atmosfer: ama sürpriz kapalı
+        // Beyza'nın dikkatini çekmek için hoş bir efekt: butonların üzerinde hafif bir ışıltı
+        console.log("NFC ile açılan romantik sayfa hazır! ✨");
+        // confetti kütüphanesini dinamik ekle (canvas confetti)
+        if (typeof window.confetti !== 'function') {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1';
+            script.onload = () => {
+                console.log('confetti yüklendi, sürprizler hazır');
+            };
+            document.head.appendChild(script);
+        } else {
+            // hazır
+        }
+        // mobilde NFC ile açıldığını anlamak için URL parametresi olabilir ama genel kullanım
+        // sadece romantik dokunuş: sayfa yüklenirken arka plana gizemli bir not
+        setTimeout(() => {
+            const hintMsg = document.createElement('div');
+            hintMsg.innerText = '💫 NFC dokunuşunla bu anı yaşadık 💫';
+            hintMsg.style.position = 'fixed';
+            hintMsg.style.top = '15px';
+            hintMsg.style.right = '15px';
+            hintMsg.style.background = '#ffefe2';
+            hintMsg.style.padding = '6px 14px';
+            hintMsg.style.borderRadius = '40px';
+            hintMsg.style.fontSize = '0.7rem';
+            hintMsg.style.fontWeight = 'bold';
+            hintMsg.style.color = '#cc7b48';
+            hintMsg.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+            hintMsg.style.zIndex = '99';
+            hintMsg.style.opacity = '0.9';
+            document.body.appendChild(hintMsg);
+            setTimeout(() => {
+                hintMsg.style.transition = 'opacity 1s';
+                hintMsg.style.opacity = '0';
+                setTimeout(() => hintMsg.remove(), 1500);
+            }, 3000);
+        }, 600);
+    });
+
+    // kartın üzerine tıklanınca sürpriz bir efekt yok ama sadece beyza için keyifli
+    // ekstra incelik: "evet" butonuna hover efektleri zaten var
+    // tüm sayfa hazır: NFC ile paylaşılabilir.
+    // Semih'in istediği: tanışıyor gibi olacaklar, sonra "sana bir şey gösterebilirim" diyecek, o da "olur" diyince bu web sayfasını göstermiş olacak.
+    // Senaryo tamam: buton "Evet, göster!" dediğinde sürpriz açılıyor. "Hayır" da kibarca cevap veriyor.
+</script>
+</body>
+</html>
